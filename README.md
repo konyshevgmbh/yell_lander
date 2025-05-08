@@ -81,6 +81,11 @@ This game is part of the [20 Games Challenge](https://20_games_challenge.gitlab.
         flutter run -d windows  # or -d macos / -d linux
         ```
         Ensure microphone permissions are granted at the OS level.
+5.  **Updating App Icons:**
+        
+    ```bash
+    dart run flutter_launcher_icons
+    ```
 
 ## ⚙️ Configuration
 
