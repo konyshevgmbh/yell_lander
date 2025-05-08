@@ -74,7 +74,7 @@ class GameMessages {
   static const String recorderError = "Error initializing recorder.\nTAP OR SPACE TO RETRY.";
   static const String audioError = "Audio error. TAP/SPACE to retry.";
   static const String retryingAudioSetup = "Retrying audio setup...";
-  static const String allLevelsCleared = "ALL LEVELS CLEARED!\nCONGRATULATIONS!\nTAP OR SPACE TO RESTART";
+  static const String allLevelsCleared = "🎉 YOU WIN! 🎉\nTap or press Space to restart";
 
   static String crashedOnLevel(int level) => "CRASHED ON LEVEL $level!\nTAP OR SPACE TO RESTART";
   static String levelCleared(int currentLevel) => "LEVEL $currentLevel CLEARED!\nTAP OR SPACE FOR LEVEL ${currentLevel + 1}";
