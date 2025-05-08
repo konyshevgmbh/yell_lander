@@ -1,0 +1,36 @@
+<svg width="25" height="45" viewBox="0 0 25 45" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(12.5, 13.4)">
+    <!-- Lander Body -->
+    <!-- Drawn according to:
+         Rect.fromCenter(
+           center: Offset(0, -size.y * 0.1), // (0, -3.2)
+           width: size.x * 0.8,             // 19.2
+           height: size.y * 0.6             // 19.2
+         )
+         So, x = -9.6, y = -12.8, width = 19.2, height = 19.2
+    -->
+    <rect x="-9.6" y="-12.8" width="19.2" height="19.2" fill="#E0E0E0" />
+
+    <!-- Lander Legs -->
+    <!-- Drawn according to:
+         Leg 1: Offset(-size.x * 0.4, size.y * 0.2) to Offset(-size.x * 0.5, size.y / 2)
+                (-9.6, 6.4) to (-12, 16)
+         Leg 2: Offset(size.x * 0.4, size.y * 0.2) to Offset(size.x * 0.5, size.y / 2)
+                (9.6, 6.4) to (12, 16)
+         StrokeWidth = 2
+    -->
+    <line x1="-9.6" y1="6.4" x2="-12" y2="16" stroke="#BDBDBD" stroke-width="2" />
+    <line x1="9.6" y1="6.4" x2="12" y2="16" stroke="#BDBDBD" stroke-width="2" />
+
+    <!-- Flame -->
+    <!-- Drawn according to:
+         Path()
+           ..moveTo(-size.x * 0.2, size.y * 0.4)                                  // (-4.8, 12.8)
+           ..lineTo(0, size.y * 0.5 + 15 * (0.8 + math.Random().nextDouble() * 0.4)) // (0, 16 + 15 * (avg 1.0)) = (0, 31)
+           ..lineTo(size.x * 0.2, size.y * 0.4)                                  // (4.8, 12.8)
+           ..close();
+         Fill Color: Colors.orangeAccent (#FFAB40)
+    -->
+    <polygon points="-4.8,12.8 0,31 4.8,12.8" fill="#FFAB40" />
+  </g>
+</svg>
