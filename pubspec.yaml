@@ -9,6 +9,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flame: ^1.17.0 # Use the latest version
+  flutter_recorder: ^1.1.1
+  permission_handler: ^10.2.0
 
 dev_dependencies:
   flutter_test:
