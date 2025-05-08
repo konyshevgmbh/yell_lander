@@ -18,7 +18,6 @@ class GameConfig {
   static const double gravityLevelMultiplier = 1.9;
   static const double safeLandingSpeed = 100.0;
   static const double defaultMinEngineVolumeThreshold = 0.2;
-  static const double landingDetectionTolerance = 1.0; // Small Y-offset for landing detection
 
   // Lander
   static final Vector2 landerSize = Vector2(24, 32);
@@ -48,10 +47,9 @@ class GameConfig {
   static const Color landingPadColor = Colors.lightGreenAccent;
 
   // HUD
-  static const String hudOverlayKey = 'hud';
   static const EdgeInsets hudPadding = EdgeInsets.all(10.0);
   static const TextStyle hudTextStyle = TextStyle(color: Colors.white, fontSize: 14);
-  // hudDataTextStyle and hudInstructionsTextStyle are now directly hudTextStyle
+
   static final TextStyle hudSliderTextStyle = hudTextStyle.copyWith(fontSize: 12);
   static final TextStyle hudMessageTextStyle = hudTextStyle.copyWith(fontSize: 28, fontWeight: FontWeight.bold);
   
@@ -59,25 +57,13 @@ class GameConfig {
   static const Color hudBarInactiveColor = Colors.orangeAccent;
   static const Color hudSliderActiveColor = Colors.lightBlueAccent;
   static final Color hudVolumeBarBorderColor = Colors.white54;
-  static const double hudVolumeBarWidth = 100.0;
-  static const double hudVolumeBarHeight = 15.0;
-
-  static const double hudThresholdSliderMin = 0.0;
-  static const double hudThresholdSliderMax = 1.0;
-  static const int hudThresholdSliderDivisions = 20;
-  static final EdgeInsets hudSliderContainerPadding = const EdgeInsets.all(4.0);
+ 
   static final Color hudSliderContainerBackgroundColor = Colors.black.withOpacity(0.5);
 
   static final EdgeInsets hudStatusMessagePadding = const EdgeInsets.symmetric(horizontal: 20, vertical: 10);
   static final Color hudStatusMessageBackgroundColor = Colors.black.withOpacity(0.6);
 
-  static const int hudDecimalPlacesPrimary = 1; // For fuel, speed
-  static const int hudDecimalPlacesSecondary = 2; // For mic vol, threshold
-
-  // Lander Visuals and Drawing Proportions are now hardcoded in LunarLander.render()
-  // as per the request to revert them to the original state.
 }
-
 
 // Text messages centralized here
 class GameMessages {
@@ -94,12 +80,12 @@ class GameMessages {
   static String levelCleared(int currentLevel) => "LEVEL $currentLevel CLEARED!\nTAP OR SPACE FOR LEVEL ${currentLevel + 1}";
 
   // HUD Labels
-  static String fuel(double value) => 'Fuel: ${value.toStringAsFixed(GameConfig.hudDecimalPlacesPrimary)}';
-  static String vSpeed(double value) => 'V-Speed: ${value.toStringAsFixed(GameConfig.hudDecimalPlacesPrimary)}';
+  static String fuel(double value) => 'Fuel: ${value.toStringAsFixed(1)}';
+  static String vSpeed(double value) => 'V-Speed: ${value.toStringAsFixed(1)}';
   static String level(int value) => 'Level: $value';
   static const String instructions = 'USE MIC VOLUME: Thrust';
-  static String micVolume(double value) => 'Mic Vol: ${value.toStringAsFixed(GameConfig.hudDecimalPlacesSecondary)}';
-  static String threshold(double value) => 'Threshold: ${value.toStringAsFixed(GameConfig.hudDecimalPlacesSecondary)}';
+  static String micVolume(double value) => 'Mic Vol: ${value.toStringAsFixed(2)}';
+  static String threshold(double value) => 'Threshold: ${value.toStringAsFixed(2)}';
 }
 
 void main() async {
@@ -108,8 +94,8 @@ void main() async {
     debugShowCheckedModeBanner: false,
     home: Scaffold(body: GameWidget.controlled(
       gameFactory: LunaLanderGame.new,
-      overlayBuilderMap: {GameConfig.hudOverlayKey: (BuildContext context, LunaLanderGame  game) => HudOverlay(game: game)},
-      initialActiveOverlays: const [GameConfig.hudOverlayKey],
+      overlayBuilderMap: {'hud': (BuildContext context, LunaLanderGame  game) => HudOverlay(game: game)},
+      initialActiveOverlays: const ['hud'],
     )),
   ));
 }
@@ -198,7 +184,7 @@ class _HudOverlayState extends State<HudOverlay> {
               children: [
                 Text(GameMessages.micVolume(game.normalizedVolume), style: GameConfig.hudTextStyle),
                 Container(
-                  width: GameConfig.hudVolumeBarWidth, height: GameConfig.hudVolumeBarHeight,
+                  width: 100.0 , height: 15.0,
                   decoration: BoxDecoration(border: Border.all(color: GameConfig.hudVolumeBarBorderColor)),
                   child: FractionallySizedBox(
                     alignment: Alignment.centerLeft,
@@ -219,7 +205,7 @@ class _HudOverlayState extends State<HudOverlay> {
           child: Padding(
             padding: GameConfig.hudPadding,
             child: Container(
-              padding: GameConfig.hudSliderContainerPadding,
+              padding: EdgeInsets.all(4.0),
               color: GameConfig.hudSliderContainerBackgroundColor,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -230,9 +216,9 @@ class _HudOverlayState extends State<HudOverlay> {
                     width: 150, height: 30,
                     child: Slider(
                       value: _currentSliderValue,
-                      min: GameConfig.hudThresholdSliderMin, 
-                      max: GameConfig.hudThresholdSliderMax, 
-                      divisions: GameConfig.hudThresholdSliderDivisions,
+                      min: 0.0, 
+                      max: 1.0, 
+                      divisions: 20,
                       activeColor: GameConfig.hudSliderActiveColor,
                       onChanged: (value) => setState(() {
                         _currentSliderValue = value;
@@ -379,8 +365,8 @@ class LunaLanderGame extends FlameGame with TapCallbacks, KeyboardEvents {
       }
       
       final terrainY = surface.getHeightAt(lander.position.x);
-      if (lander.position.y >= terrainY - GameConfig.landingDetectionTolerance) {
-        lander.position.y = terrainY - GameConfig.landingDetectionTolerance;
+      if (lander.position.y >= terrainY - 1.0) {
+        lander.position.y = terrainY - 1.0;
         lander.velocity = Vector2.zero();
         lander.stopThrust();
         levelConcluded = currentLevel;
