@@ -442,7 +442,9 @@ class LunaLanderGame extends FlameGame with TapCallbacks, KeyboardEvents {
   void _startLevel() {
     levelConcluded = null;
     if (_gameComponentsLoaded) {
-      surface.regenerate(size);
+      if(currentLevel != 1) {
+        surface.regenerate(size);
+      }
       lander.reset(position: Vector2(size.x / 2, GameConfig.landerLevelStartY));
     }
     gameState = GameState.playing;
