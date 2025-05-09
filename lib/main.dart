@@ -560,7 +560,6 @@ class LunaLanderGame extends FlameGame with TapCallbacks, KeyboardEvents {
   void _resetGame() {
     levelConcluded = null;
     currentLevel = 1;
-    minEngineVolumeThreshold = GameConfig.defaultMinEngineVolumeThreshold;
     if (_gameComponentsLoaded) {
       surface.regenerate(size);
       lander.reset(
