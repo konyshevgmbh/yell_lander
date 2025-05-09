@@ -69,13 +69,13 @@ class GameConfig {
   static final Color hudVolumeBarBorderColor = Colors.white54;
 
   static final Color hudSliderContainerBackgroundColor = Colors.black
-      .withOpacity(0.5);
+      .withValues(alpha:0.5);
 
   static final EdgeInsets hudStatusMessagePadding = const EdgeInsets.symmetric(
     horizontal: 20,
     vertical: 10,
   );
-  static final Color hudStatusMessageBackgroundColor = Colors.black.withOpacity(
+  static final Color hudStatusMessageBackgroundColor = Colors.black..withValues(alpha:
     0.6,
   );
 }
@@ -411,8 +411,8 @@ class LunaLanderGame extends FlameGame with TapCallbacks, KeyboardEvents {
   }
 
   @override
-  void onGameResize(Vector2 canvasSize) {
-    super.onGameResize(canvasSize);
+  void onGameResize(Vector2 size) {
+    super.onGameResize(size);
     if (_gameComponentsLoaded) {
       final oldWidth =
           surface.terrainPoints.isNotEmpty
@@ -434,7 +434,7 @@ class LunaLanderGame extends FlameGame with TapCallbacks, KeyboardEvents {
     if (isRecorderInitialized) {
       try {
         final db = recorder.getVolumeDb();
-        if (db != null && db.isFinite) {
+        if ( db.isFinite) {
           normalizedVolume = ((db.clamp(
                         GameConfig.minDbVolume,
                         GameConfig.maxDbVolume,
@@ -634,12 +634,12 @@ class LunarLander extends PositionComponent {
       canvas.drawCircle(
         Offset.zero,
         size.x * 1.5,
-        Paint()..color = Colors.red.withOpacity(0.8),
+        Paint()..color = Colors.red.withValues(alpha:0.8),
       );
       canvas.drawCircle(
         Offset.zero,
         size.x * 0.8,
-        Paint()..color = Colors.orange.withOpacity(0.9),
+        Paint()..color = Colors.orange.withValues(alpha:0.9),
       );
       return;
     }
