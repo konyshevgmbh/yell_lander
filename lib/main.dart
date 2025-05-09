@@ -13,7 +13,7 @@ import 'package:permission_handler/permission_handler.dart';
 class GameConfig {
   // General Game Mechanics
   static const int maxLevels = 3;
-  static const double initialFuel = 100.0;
+  static const double initialFuel = 10.0;
   static const double baseGravity = 90.0;
   static const double gravityLevelMultiplier = 1.9;
   static const double safeLandingSpeed = 100.0;
