@@ -68,16 +68,13 @@ class GameConfig {
   static const Color hudSliderActiveColor = Colors.lightBlueAccent;
   static final Color hudVolumeBarBorderColor = Colors.white54;
 
-  static final Color hudSliderContainerBackgroundColor = Colors.black
-      .withValues(alpha:0.5);
+  static final Color hudSliderContainerBackgroundColor = Colors.black.withValues(alpha:0.5);
 
   static final EdgeInsets hudStatusMessagePadding = const EdgeInsets.symmetric(
     horizontal: 20,
     vertical: 10,
   );
-  static final Color hudStatusMessageBackgroundColor = Colors.black..withValues(alpha:
-    0.6,
-  );
+  static final Color hudStatusMessageBackgroundColor = Colors.black.withValues(alpha:0.6);
 }
 
 // Text messages centralized here
