@@ -12,7 +12,7 @@ This game is part of the [20 Games Challenge](https://20_games_challenge.gitlab.
 
 ![Game Preview](/assets/icon/preview/preview.png)
 
-[Start Game](https://konyshevgmbh.github.io/yell_lander/).
+[Run Game](https://konyshevgmbh.github.io/yell_lander/).
 
 ## 🚀 Features
 
