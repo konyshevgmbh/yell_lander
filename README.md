@@ -126,7 +126,7 @@ Most game parameters are defined in `lib/main.dart` within the `GameConfig` clas
 
 ## 📜 License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details (if you add one).
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
 ---
 
