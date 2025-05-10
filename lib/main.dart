@@ -82,20 +82,22 @@ class GameMessages {
   // Game State & Instructions
   static const String initializing = "Initializing...";
   static const String welcome =
-      "SAY AAA-A-A AND FLY\nReach all ${GameConfig.maxLevels} levels!\n(TAP OR SPACE TO START)";
+    "Say AAA and Fly!\n${GameConfig.maxLevels} levels!\n(Tap to start)";
   static const String permissionDenied =
-      "Microphone permission denied.\nTAP OR SPACE TO RETRY.";
+      "No mic access.\nTap to try again";
   static const String recorderError =
-      "Error initializing recorder.\nTAP OR SPACE TO RETRY.";
-  static const String audioError = "Audio error. TAP/SPACE to retry.";
-  static const String retryingAudioSetup = "Retrying audio setup...";
+      "Mic error.\nTap to try again";
+  static const String audioError = 
+      "Audio glitch.\nTap to try again";
+  static const String retryingAudioSetup = 
+      "Retrying audio setup...";
   static const String allLevelsCleared =
-      "🎉 YOU WIN! 🎉\nTap or press Space to restart";
+      "🎉 YOU WIN! 🎉\nTap to play again";
 
   static String crashedOnLevel(int level) =>
-      "CRASHED ON LEVEL $level!\nTAP OR SPACE TO RESTART";
+      "Boom! Level $level!\nTap to try again";
   static String levelCleared(int currentLevel) =>
-      "LEVEL $currentLevel CLEARED!\nTAP OR SPACE FOR LEVEL ${currentLevel + 1}";
+      "Level $currentLevel complete!\nTap for Level ${currentLevel + 1}";
 
   // HUD Labels
   static String fuel(double value) => 'Fuel: ${value.toStringAsFixed(1)}';
