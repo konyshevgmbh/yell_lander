@@ -86,6 +86,7 @@ This game is part of the [20 Games Challenge](https://20_games_challenge.gitlab.
     ```bash
     dart run flutter_launcher_icons
     ```
+    Fix circular Android icons using [Icon Kitchen](https://icon.kitchen/).
 
 ## ⚙️ Configuration
 
