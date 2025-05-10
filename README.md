@@ -10,7 +10,7 @@ A classic Lunar Lander game built with Flutter and the Flame engine, where you c
 
 This game is part of the [20 Games Challenge](https://20_games_challenge.gitlab.io/games/lander/).
 
-![Game Preview](/assets/icon/preview/preview.png)
+![Game Preview](/doc/preview.png)
 
 [Run Game](https://konyshevgmbh.github.io/yell_lander/).
 
