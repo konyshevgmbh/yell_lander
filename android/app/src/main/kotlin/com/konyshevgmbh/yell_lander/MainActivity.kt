@@ -1,4 +1,4 @@
-package com.example.yell_lander
+package com.konyshevgmbh.yell_lander
 
 import io.flutter.embedding.android.FlutterActivity
 
