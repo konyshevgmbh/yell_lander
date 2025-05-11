@@ -90,6 +90,10 @@ This game is part of the [20 Games Challenge](https://20_games_challenge.gitlab.
     ```
     Fix circular Android icons using [Icon Kitchen](https://icon.kitchen/).
 
+6.  **Translating:**
+    ```bash
+    flutter pub run build_runner build --delete-conflicting-outputs
+    ```
 ## ⚙️ Configuration
 
 Most game parameters are defined in `lib/main.dart` within the `GameConfig` class. You can tweak these values to change the gameplay:
