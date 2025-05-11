@@ -12,7 +12,9 @@ This game is part of the [20 Games Challenge](https://20_games_challenge.gitlab.
 
 ![Game Preview](/doc/preview.png)
 
-[Run Game](https://konyshevgmbh.github.io/yell_lander/).
+🎮 **Play Now:** [Run Web Game](https://konyshevgmbh.github.io/yell_lander/)  
+📱 **Get it on RuStore:** [Download for Android](https://www.rustore.ru/catalog/app/com.konyshevgmbh.yell_lander)
+
 
 ## 🚀 Features
 
