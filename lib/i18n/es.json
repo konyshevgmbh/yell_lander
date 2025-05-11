@@ -1,0 +1,24 @@
+{
+  "meta": {
+    "locale": "es",
+    "description": "Traducciones al español para el juego Luna Lander"
+  },
+  "game": {
+    "initializing": "Inicializando...",
+    "welcome": "¡Di AAA y Vuela!\n¡${maxLevels} niveles!\n(Toca para empezar)",
+    "permissionDenied": "Sin acceso al micrófono.\nToca para reintentar",
+    "recorderError": "Error de micrófono.\nToca para reintentar",
+    "audioError": "Fallo de audio.\nToca para reintentar",
+    "retryingAudioSetup": "Reintentando configuración de audio...",
+    "allLevelsCleared": "🎉 ¡GANASTE! 🎉\nToca para jugar de nuevo",
+    "crashedOnLevel": "¡Boom! ¡Nivel ${level}!\nToca para reintentar",
+    "levelCleared": "¡Nivel ${currentLevel} completado!\nToca para Nivel ${nextLevel}"
+  },
+  "hud": {
+    "fuel": "Combustible: ${value}",
+    "vSpeed": "Velocidad-V: ${value}",
+    "level": "Nivel: ${value}",
+    "micVolume": "Vol. Mic.: ${value}",
+    "threshold": "Umbral: ${value}"
+  }
+}

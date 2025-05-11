@@ -12,12 +12,16 @@ dependencies:
   flame: ^1.17.0 # Use the latest version
   flutter_recorder: ^1.1.1
   permission_handler: ^11.0.1
+  slang: ^4.7.0 
+  slang_flutter: ^4.7.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
   flutter_launcher_icons: ^0.14.1
+  build_runner: ^2.4.0
+  slang_build_runner: ^4.7.0
 
 flutter_launcher_icons:
   android: "launcher_icon"

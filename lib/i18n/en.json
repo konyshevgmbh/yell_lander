@@ -1,0 +1,24 @@
+{
+  "meta": {
+    "locale": "en",
+    "description": "English translations for Luna Lander Game"
+  },
+  "game": {
+    "initializing": "Initializing...",
+    "welcome": "Say AAA and Fly!\n${maxLevels} levels!\n(Tap to start)",
+    "permissionDenied": "No mic access.\nTap to try again",
+    "recorderError": "Mic error.\nTap to try again",
+    "audioError": "Audio glitch.\nTap to try again",
+    "retryingAudioSetup": "Retrying audio setup...",
+    "allLevelsCleared": "🎉 YOU WIN! 🎉\nTap to play again",
+    "crashedOnLevel": "Boom! Level ${level}!\nTap to try again",
+    "levelCleared": "Level ${currentLevel} complete!\nTap for Level ${nextLevel}"
+  },
+  "hud": {
+    "fuel": "Fuel: ${value}",
+    "vSpeed": "V-Speed: ${value}",
+    "level": "Level: ${value}",
+    "micVolume": "Mic Vol: ${value}",
+    "threshold": "Threshold: ${value}"
+  }
+}

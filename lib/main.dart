@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_recorder/flutter_recorder.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import 'generated/translations.g.dart'; 
 // Game Configuration Constants
 class GameConfig {
   // General Game Mechanics
@@ -77,53 +78,30 @@ class GameConfig {
   static final Color hudStatusMessageBackgroundColor = Colors.black.withValues(alpha:0.6);
 }
 
-// Text messages centralized here
-class GameMessages {
-  // Game State & Instructions
-  static const String initializing = "Initializing...";
-  static const String welcome =
-    "Say AAA and Fly!\n${GameConfig.maxLevels} levels!\n(Tap to start)";
-  static const String permissionDenied =
-      "No mic access.\nTap to try again";
-  static const String recorderError =
-      "Mic error.\nTap to try again";
-  static const String audioError = 
-      "Audio glitch.\nTap to try again";
-  static const String retryingAudioSetup = 
-      "Retrying audio setup...";
-  static const String allLevelsCleared =
-      "🎉 YOU WIN! 🎉\nTap to play again";
-
-  static String crashedOnLevel(int level) =>
-      "Boom! Level $level!\nTap to try again";
-  static String levelCleared(int currentLevel) =>
-      "Level $currentLevel complete!\nTap for Level ${currentLevel + 1}";
-
-  // HUD Labels
-  static String fuel(double value) => 'Fuel: ${value.toStringAsFixed(1)}';
-  static String vSpeed(double value) => 'V-Speed: ${value.toStringAsFixed(1)}';
-  static String level(int value) => 'Level: $value';
-  static String micVolume(double value) =>
-      'Mic Vol: ${value.toStringAsFixed(2)}';
-  static String threshold(double value) =>
-      'Threshold: ${value.toStringAsFixed(2)}';
-}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await LocaleSettings.useDeviceLocale();
+  //await LocaleSettings.setLocale(AppLocale.ru); 
   runApp(
-    MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: GameWidget.controlled(
-          gameFactory: LunaLanderGame.new,
-          overlayBuilderMap: {
-            'hud':
-                (BuildContext context, LunaLanderGame game) =>
-                    HudOverlay(game: game),
-          },
-          initialActiveOverlays: const ['hud'],
+    TranslationProvider(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          body: GameWidget.controlled(
+            gameFactory: LunaLanderGame.new,
+            overlayBuilderMap: {
+              'hud':
+                  (BuildContext context, LunaLanderGame game) =>
+                      HudOverlay(game: game),
+            },
+            initialActiveOverlays: const ['hud'],
+          ),
         ),
+        // For full localization support with Flutter widgets (if needed):
+        // locale: TranslationProvider.of(context).flutterLocale,
+        // supportedLocales: AppLocaleUtils.supportedLocales,
+        // localizationsDelegates: GlobalMaterialLocalizations.delegates,
       ),
     ),
   );
@@ -174,11 +152,11 @@ class _HudOverlayState extends State<HudOverlay> {
 
     switch (game.gameState) {
       case GameState.gameWon:
-        displayMessage = GameMessages.allLevelsCleared;
+        displayMessage = t.game.allLevelsCleared;
         break;
       case GameState.crashed:
-        displayMessage = GameMessages.crashedOnLevel(
-          game.levelConcluded ?? game.currentLevel,
+        displayMessage = t.game.crashedOnLevel(
+          level: (game.levelConcluded ?? game.currentLevel).toString(),
         );
         break;
       case GameState.playing:
@@ -199,11 +177,11 @@ class _HudOverlayState extends State<HudOverlay> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    GameMessages.fuel(game.fuelValue),
+                    t.hud.fuel(value: game.fuelValue.toStringAsFixed(1)), 
                     style: GameConfig.hudTextStyle,
                   ),
                   Text(
-                    GameMessages.vSpeed(game.velocityYValue),
+                    t.hud.vSpeed(value: game.velocityYValue.toStringAsFixed(1)), 
                     style: GameConfig.hudTextStyle,
                   ),
                 ],
@@ -218,7 +196,7 @@ class _HudOverlayState extends State<HudOverlay> {
             child: Padding(
               padding: GameConfig.hudPadding,
               child: Text(
-                GameMessages.level(game.currentLevel),
+                t.hud.level(value: game.currentLevel.toString()),
                 style: GameConfig.hudTextStyle,
               ),
             ),
@@ -229,25 +207,23 @@ class _HudOverlayState extends State<HudOverlay> {
         if (game.isRecorderInitialized)
           SafeArea(
             child: Align(
-              // Align the entire Row to the bottom. The Row itself will span the width.
               alignment: Alignment.bottomCenter,
               child: Padding(
                 padding: GameConfig.hudPadding,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween, // Key for left/right
-                  crossAxisAlignment: CrossAxisAlignment.start, // Key for aligning tops
-                  // textBaseline: TextBaseline.alphabetic, // Use with CrossAxisAlignment.baseline if needed
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Mic Volume Group (Left)
                     Column(
-                      mainAxisSize: MainAxisSize.min, // Important for Column in Row
+                      mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          GameMessages.micVolume(game.normalizedVolume),
+                          t.hud.micVolume(value: game.normalizedVolume.toStringAsFixed(2)), 
                           style: GameConfig.hudTextStyle,
                         ),
-                        const SizedBox(height: 4), // Space between text and bar
+                        const SizedBox(height: 4),
                         Container(
                           width: 100.0,
                           height: 15.0,
@@ -277,11 +253,11 @@ class _HudOverlayState extends State<HudOverlay> {
                         borderRadius: BorderRadius.circular(4.0),
                       ),
                       child: Column(
-                        mainAxisSize: MainAxisSize.min, // Important for Column in Row
+                        mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            GameMessages.threshold(_currentSliderValue),
+                            t.hud.threshold(value: _currentSliderValue.toStringAsFixed(2)), 
                             style: GameConfig.hudTextStyle,
                           ),
                           SizedBox(
@@ -336,7 +312,7 @@ class LunaLanderGame extends FlameGame with TapCallbacks, KeyboardEvents {
   final recorder = Recorder.instance;
   bool isRecorderInitialized = false;
   bool hasPermission = false;
-  String statusMessage = GameMessages.initializing;
+  String statusMessage = t.game.initializing;
 
   GameState gameState = GameState.initializing;
   double normalizedVolume = 0.0;
@@ -364,7 +340,7 @@ class LunaLanderGame extends FlameGame with TapCallbacks, KeyboardEvents {
   @override
   Future<void> onLoad() async {
     gameState = GameState.initializing;
-    statusMessage = GameMessages.initializing;
+    statusMessage = t.game.initializing;
     if (!_gameComponentsLoaded) {
       surface = LunarSurface();
       lander = LunarLander(
@@ -378,10 +354,10 @@ class LunaLanderGame extends FlameGame with TapCallbacks, KeyboardEvents {
     gameState = GameState.welcome;
     statusMessage =
         hasPermission && isRecorderInitialized
-            ? GameMessages.welcome
+            ? t.game.welcome(maxLevels: GameConfig.maxLevels.toString()) 
             : (hasPermission
-                ? GameMessages.recorderError
-                : GameMessages.permissionDenied);
+                ? t.game.recorderError
+                : t.game.permissionDenied);
     onHudUpdate?.call();
   }
 
@@ -402,10 +378,10 @@ class LunaLanderGame extends FlameGame with TapCallbacks, KeyboardEvents {
       } catch (e) {
         debugPrint("Recorder init error: $e");
         isRecorderInitialized = false;
-        statusMessage = GameMessages.recorderError;
+        statusMessage = t.game.recorderError;
       }
     } else {
-      statusMessage = GameMessages.permissionDenied;
+      statusMessage = t.game.permissionDenied;
     }
   }
 
@@ -448,7 +424,7 @@ class LunaLanderGame extends FlameGame with TapCallbacks, KeyboardEvents {
         debugPrint("Recorder getVolumeDb error: $e");
         isRecorderInitialized = false;
         normalizedVolume = 0.0;
-        statusMessage = GameMessages.audioError;
+        statusMessage = t.game.audioError;
         gameState = GameState.welcome;
       }
     }
@@ -488,8 +464,11 @@ class LunaLanderGame extends FlameGame with TapCallbacks, KeyboardEvents {
                   : GameState.levelWonTransition;
           statusMessage =
               currentLevel == GameConfig.maxLevels
-                  ? ""
-                  : GameMessages.levelCleared(currentLevel);
+                  ? "" // No message, displayMessage in HUD will handle "YOU WIN"
+                  : t.game.levelCleared(
+                      currentLevel: currentLevel.toString(),
+                      nextLevel: (currentLevel + 1).toString()
+                    ); 
         } else {
           gameState = GameState.crashed;
           lander.showExplosion();
@@ -521,16 +500,16 @@ class LunaLanderGame extends FlameGame with TapCallbacks, KeyboardEvents {
         _startLevel();
       } else {
         gameState = GameState.initializing;
-        statusMessage = GameMessages.retryingAudioSetup;
+        statusMessage = t.game.retryingAudioSetup;
         onHudUpdate?.call();
         _requestPermissionAndInitialize().then((_) {
           gameState = GameState.welcome;
           statusMessage =
               hasPermission && isRecorderInitialized
-                  ? GameMessages.welcome
+                  ? t.game.welcome(maxLevels: GameConfig.maxLevels.toString()) 
                   : (hasPermission
-                      ? GameMessages.recorderError
-                      : GameMessages.permissionDenied);
+                      ? t.game.recorderError
+                      : t.game.permissionDenied);
           onHudUpdate?.call();
         });
       }
@@ -568,10 +547,10 @@ class LunaLanderGame extends FlameGame with TapCallbacks, KeyboardEvents {
     gameState = GameState.welcome;
     statusMessage =
         hasPermission && isRecorderInitialized
-            ? GameMessages.welcome
+            ? t.game.welcome(maxLevels: GameConfig.maxLevels.toString()) 
             : (hasPermission
-                ? GameMessages.recorderError
-                : GameMessages.permissionDenied);
+                ? t.game.recorderError
+                : t.game.permissionDenied);
     onHudUpdate?.call();
   }
 
@@ -629,7 +608,6 @@ class LunarLander extends PositionComponent {
   void render(Canvas canvas) {
     super.render(canvas);
     if (isExploding) {
-      // Original explosion drawing
       canvas.drawCircle(
         Offset.zero,
         size.x * 1.5,
@@ -643,7 +621,6 @@ class LunarLander extends PositionComponent {
       return;
     }
 
-    // Draw lander body (original drawing)
     canvas.drawRect(
       Rect.fromCenter(
         center: Offset(0, -size.y * 0.1),
@@ -653,7 +630,6 @@ class LunarLander extends PositionComponent {
       Paint()..color = Colors.grey[300]!,
     );
 
-    // Draw legs (original drawing)
     final legPaint =
         Paint()
           ..color = Colors.grey[400]!
@@ -669,7 +645,6 @@ class LunarLander extends PositionComponent {
       legPaint,
     );
 
-    // Draw flame (original drawing)
     if (_showFlame) {
       final flamePath =
           Path()

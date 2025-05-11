@@ -1,0 +1,16 @@
+targets:
+  $default:
+    builders:
+      slang_build_runner:
+        options:
+          base_locale: en
+          fallback_strategy: base_locale
+          input_directory: i18n
+          input_file_pattern: .json  
+          output_directory: lib/generated
+          output_file_name: translations.g.dart
+          output_format: single_file
+          translation_class_name: Translations  
+          string_interpolation: dart   
+          timestamp: true
+          key_case: camelCase  

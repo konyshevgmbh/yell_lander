@@ -1,0 +1,24 @@
+{
+  "meta": {
+    "locale": "cn",
+    "description": "月球着陆器游戏简体中文翻译"
+  },
+  "game": {
+    "initializing": "初始化中...",
+    "welcome": "说 AAA 然后起飞！\n${maxLevels} 个级别！\n(点击开始)",
+    "permissionDenied": "无麦克风权限。\n点击重试",
+    "recorderError": "麦克风错误。\n点击重试",
+    "audioError": "音频故障。\n点击重试",
+    "retryingAudioSetup": "重试音频设置...",
+    "allLevelsCleared": "🎉 你赢了！🎉\n点击重新开始",
+    "crashedOnLevel": "砰！第 ${level} 关！\n点击重试",
+    "levelCleared": "第 ${currentLevel} 关完成！\n点击进入第 ${nextLevel} 关"
+  },
+  "hud": {
+    "fuel": "燃料: ${value}",
+    "vSpeed": "垂直速度: ${value}",
+    "level": "级别: ${value}",
+    "micVolume": "麦克风音量: ${value}",
+    "threshold": "阈值: ${value}"
+  }
+}

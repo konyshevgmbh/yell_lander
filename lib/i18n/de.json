@@ -1,0 +1,24 @@
+{
+  "meta": {
+    "locale": "de",
+    "description": "Deutsche Übersetzungen für das Luna Lander Spiel"
+  },
+  "game": {
+    "initializing": "Initialisiere...",
+    "welcome": "Sag AAA und Flieg!\n${maxLevels} Level!\n(Tippen zum Starten)",
+    "permissionDenied": "Kein Mikrofonzugriff.\nZum Wiederholen tippen",
+    "recorderError": "Mikrofonfehler.\nZum Wiederholen tippen",
+    "audioError": "Audio-Problem.\nZum Wiederholen tippen",
+    "retryingAudioSetup": "Audio-Setup wird wiederholt...",
+    "allLevelsCleared": "🎉 DU HAST GEWONNEN! 🎉\nZum Neustarten tippen",
+    "crashedOnLevel": "Bumm! Level ${level}!\nZum Wiederholen tippen",
+    "levelCleared": "Level ${currentLevel} geschafft!\nTippen für Level ${nextLevel}"
+  },
+  "hud": {
+    "fuel": "Treibstoff: ${value}",
+    "vSpeed": "V-Geschw.: ${value}",
+    "level": "Level: ${value}",
+    "micVolume": "Mikro-Lautst.: ${value}",
+    "threshold": "Schwelle: ${value}"
+  }
+}
