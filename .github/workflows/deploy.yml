@@ -2,10 +2,10 @@ name: Deploy Yell Lander Web to GitHub Pages
 
 on:
   push:
-    branches: [ main ]   
+    branches: [ main ]
 
 jobs:
-  check-version:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,23 +19,28 @@ jobs:
         run: |
           if git diff HEAD^ HEAD -- pubspec.yaml | grep '^+version:'; then
             echo "Version changed"
+            echo "changed=true" >> $GITHUB_OUTPUT
           else
             echo "Version did not change"
-            exit 0  
+            echo "changed=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Set up Flutter
+        if: steps.version_check.outputs.changed == 'true'
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.29.3'   
+          flutter-version: '3.29.3'
 
       - name: Install dependencies
+        if: steps.version_check.outputs.changed == 'true'
         run: flutter pub get
 
       - name: Build web
+        if: steps.version_check.outputs.changed == 'true'
         run: flutter build web --base-href "/yell_lander/"
 
       - name: Deploy to GitHub Pages
+        if: steps.version_check.outputs.changed == 'true'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
