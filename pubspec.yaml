@@ -1,7 +1,7 @@
 name: yell_lander
 description: "Fly a lunar module using only the power of your voice!"
 publish_to: 'none'
-version: 0.2.0
+version: 0.3.0
 
 environment:
   sdk: ^3.7.2
