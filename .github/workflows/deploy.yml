@@ -5,12 +5,24 @@ on:
     branches: [ main ]   
 
 jobs:
-  build-and-deploy:
+  check-version:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Check if version changed in pubspec.yaml
+        id: version_check
+        run: |
+          if git diff HEAD^ HEAD -- pubspec.yaml | grep '^+version:'; then
+            echo "Version changed"
+          else
+            echo "Version did not change"
+            exit 0  
+          fi
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
